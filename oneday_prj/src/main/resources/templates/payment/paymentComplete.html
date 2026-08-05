@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>결제하기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 완료! 클래스 예약이 확정되었습니다. | Class 101</title>
+  <link rel="stylesheet" href="../paymentComplete.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">Class 101</div>
+      <nav class="nav">
+        <a href="#">로그아웃</a>
+        <a href="#">고객센터</a>
+        <a href="#">마이페이지</a>
+        <a href="#">예약내역</a>
+        <a href="#">관심목록</a>
+        <span class="hamburger">☰</span>
+      </nav>
+    </header>
+
+    <!-- Title Section -->
+    <section class="title-section">
+      <h1 class="main-title">결제 완료! 클래스 예약이 확정되었습니다.</h1>
+      
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="step"><span>1</span> 클래스 선택</div>
+        <div class="line"></div>
+        <div class="step"><span>2</span> 예약 정보</div>
+        <div class="line"></div>
+        <div class="step"><span>3</span> 결제</div>
+        <div class="line"></div>
+        <div class="step active"><span>4</span> 결제 완료</div>
+      </div>
+    </section>
+
+    <!-- Main Receipt Card -->
+    <main class="receipt-card">
+      <!-- Success Icon -->
+      <div class="success-icon-wrapper">
+        <svg class="success-icon" viewBox="0 0 24 24" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+
+      <!-- Reservation Metadata -->
+      <div class="reservation-meta">
+        <p><strong>예약번호:</strong> <span th:text="">C101-20260720-001</span></p>
+        <p><strong>결제 일시:</strong> <span th:text="">2026.07.20 오후 02:26</span></p>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Class Info -->
+      <div class="class-info">
+        <!-- 임시 베이킹 이미지 대체 (추후 실제 이미지 주소로 변경하여 사용 가능) -->
+        <img class="class-image" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=300&auto=format&fit=crop" alt="토끼 빵 만들기">
+        <div class="class-details">
+          <span class="badge class-badge" th:text="">베이킹</span>
+          <h2 class="class-title" th:text="">토끼 빵 만들기</h2>
+          
+          <div class="class-meta-item">
+            <!-- 달력 아이콘 -->
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+            <span th:text="">2026.07.25 (토) 14:00~16:30</span>
+          </div>
+          <div class="class-meta-item">
+            <!-- 지도 핀 아이콘 -->
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span th:text="">서울 마포구 스튜디오</span>
+          </div>
+          <div class="class-meta-item">
+            <!-- 사람 인원 아이콘 -->
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span th:text="">성인 1명</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Payment Summary -->
+      <div class="payment-summary">
+        <span class="label">최종 결제 금액</span>
+        <span class="amount" th:text="">45,000원 <small>(신용/체크카드 일시불)</small></span>
+      </div>
+    </main>
+
+    <!-- Notice Box -->
+    <section class="notice-box">
+      <h3 class="notice-title">중요 안내 사항</h3>
+      <ul class="notice-list">
+        <li>클래스 시작 3일 전까지 100% 환불 가능합니다.</li>
+        <li>클래스 시작 2일 전부터는 환불이 불가합니다.</li>
+        <li>클래스 모집 인원 미달 시, 클래스가 취소될 수 있으며 이 경우 전액 환불됩니다.</li>
+        <li>스튜디오 방문 안내 사항을 사전에 확인하여 원활한 참가가 될 수 있도록 지참하시기 바랍니다.</li>
+      </ul>
+    </section>
+
+    <!-- Buttons -->
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="alert('예약 내역 페이지로 이동합니다.')">예약 내역 확인하기</button>
+      <button class="btn btn-secondary" onclick="alert('홈페이지로 이동합니다.')">홈으로 이동</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <p><strong>원데이클래스 주식회사</strong></p>
+        <p>주소: 06043 서울특별시 강남구 테헤란로 123, 클래스101 빌딩 8층 | 사업자 등록번호: 141-81-81254</p>
+        <p>통신판매업 신고번호: 제 2026-서울강남-1010호 | 대표: 김클래스 | 개인정보보호 책임자: 서클래스</p>
+        <p>이메일: cs@class101.co.kr | 전화: 1588-7822</p>
+      </div>
+      <div class="footer-right">
+        <span class="sns-icon">f</span>
+        <span class="sns-icon">i</span>
+        <span class="sns-icon">y</span>
+        <span class="sns-icon">k</span>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

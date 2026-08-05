@@ -1,15 +1,13 @@
 package kr.co.oneday.dao;
 
-public class PaymentDAO {
-	public int insertPayment(PaymentDAO pDAO) {
-		
-	}
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface PaymentDAO {
+
+	public int insertPayment(PaymentDAO pDAO);
 	
-	public int updatePayment(int paymentCode) {
-		
-	}
+	public int updatePayment(int paymentCode);
 	
-	public PaymentDAO selectPayment(int paymentCode) {
-		
-	}
+	public PaymentDAO selectPayment(int paymentCode);
 }
