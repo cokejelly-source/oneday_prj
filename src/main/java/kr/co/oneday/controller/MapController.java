@@ -1,6 +1,5 @@
 package kr.co.oneday.controller;
 
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,6 @@ public class MapController{
        // List<ClassDTO> classList = mapService.getClass();
         
         //model.addAttribute("classList", classList);
-        return "map"; // class-map.html 템플릿 호출
+        return "map/map"; // class-map.html 템플릿 호출
     }
 }
