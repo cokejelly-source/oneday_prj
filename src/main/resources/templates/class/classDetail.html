@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 상세 - 원데이클래스</title>
+    <!-- 직접 생성한 style.css를 링크합니다 -->
+    <link rel="stylesheet" th:href="@{/css/classDetail.css}">
+</head>
+<body>
+
+    <!-- GNB 헤더 -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo-area">
+                <a href="#" class="logo-title">Class 101</a>
+                <span class="service-name">원데이클래스</span>
+            </div>
+            <nav class="gnb-nav">
+                <a href="#">로그아웃</a>
+                <a href="#">고객센터</a>
+                <a href="#">마이페이지</a>
+                <a href="#">예약내역</a>
+                <a href="#">관심목록</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 카테고리 네비게이션 -->
+    <div class="category-nav">
+        <div class="category-inner">
+            <div class="category-list">
+                <a href="#" class="active">전체</a>
+                <a href="#">요리</a>
+                <a href="#">수공예</a>
+                <a href="#">미술</a>
+                <a href="#">뷰티</a>
+                <a href="#">액티비티</a>
+                <a href="#">음악</a>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="원하는 키워드를 검색해보세요." class="search-input">
+                <button class="search-btn" type="button">검색</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인 레이아웃 -->
+    <main class="container">
+        <div class="main-layout">
+            
+            <!-- [좌측 영역] 상세 정보 -->
+            <section class="left-content">
+                
+                <!-- 대표 이미지 배너 -->
+                <div class="banner-container">
+                    <img th:src="${detail.classDetail.imageUrl}" class="banner-image" alt="클래스 대표 이미지">
+                    <div class="banner-overlay">
+                        <span class="badge-category">원데이클래스</span>
+                        <h1 class="banner-title" th:text="${detail.classDetail.title}">클래스 타이틀</h1>
+                    </div>
+                </div>
+
+                <!-- Sticky 탭 메뉴 -->
+                <div class="sticky-tabs">
+                    <a href="#intro" class="tab-item active">클래스 소개</a>
+                    <a href="#curriculum" class="tab-item">커리큘럼</a>
+                    <a href="#reviews" class="tab-item">리뷰 <span th:text="${detail.reviewSummary != null ? detail.reviewSummary.totalCount : 0}">0</span></a>
+                    <a href="#tutor" class="tab-item">튜터 소개</a>
+                </div>
+
+                <!-- 🚨 주의 사항 박스 -->
+                <div class="box-warning">
+                    <h4>🚨 클래스 결제 전, 확인해주세요!</h4>
+                   <!--  <p class="whitespace-pre-line" th:text="${detail.classDetail.notice}">공지사항...</p> -->
+                </div>
+
+                <!-- ✅ 30초 요약 박스 -->
+                <div class="box-summary">
+                    <h4>✅ 클래스 30초 요약</h4>
+                    <p class="whitespace-pre-line" th:text="${detail.classDetail.summary}">클래스 요약...</p>
+                </div>
+
+                <!-- 클래스 소개 본문 -->
+                <article id="intro" class="detail-section">
+                    <h3 class="section-title">클래스 소개</h3>
+                    <div class="section-body whitespace-pre-line" th:text="${detail.classDetail.introText}">
+                        상세 소개 글 본문...
+                    </div>
+                </article>
+
+                <!-- 커리큘럼 영역 -->
+                <article id="curriculum" class="detail-section">
+                    <h3 class="section-title">커리큘럼</h3>
+                    <div class="curriculum-box whitespace-pre-line" 
+                         th:text="${detail.curriculum != null ? detail.curriculum.content : '커리큘럼 준비 중입니다.'}">
+                        진행 가이드...
+                    </div>
+                </article>
+
+                <!-- 리뷰 영역 -->
+                <section id="reviews" class="detail-section">
+                    <h3 class="review-header-title">
+                        리뷰 <span>7</span>
+                    </h3>
+                    
+                    <!-- 별점 통계 레이아웃 -->
+                    <div class="review-stats-card" th:if="${detail.reviewSummary != null}">
+                        <div class="score-summary">
+                            <span class="score-big" th:text="${detail.reviewSummary.averageRating}">5.0</span>
+                            <div class="star-rating-emerald">★★★★★</div>
+                        </div>
+                        <div class="chart-bars-container">
+                            <div class="chart-row">
+                                <span class="chart-label">5점</span>
+                                <div class="chart-track">
+                                    <div class="chart-fill" th:style="'width: ' + (${detail.reviewSummary.totalCount > 0} ? (${detail.reviewSummary.star5Count} * 100 / ${detail.reviewSummary.totalCount}) : 0) + '%'"></div>
+                                </div>
+                                <span class="chart-count" th:text="${detail.reviewSummary.star5Count}">0</span>
+                            </div>
+                            <div class="chart-row">
+                                <span class="chart-label">4점</span>
+                                <div class="chart-track">
+                                    <div class="chart-fill" th:style="'width: ' + (${detail.reviewSummary.totalCount > 0} ? (${detail.reviewSummary.star4Count} * 100 / ${detail.reviewSummary.totalCount}) : 0) + '%'"></div>
+                                </div>
+                                <span class="chart-count" th:text="${detail.reviewSummary.star4Count}">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 정렬 필터 -->
+                    <div class="review-sort-bar">
+                        <button class="sort-btn active">추천순</button>
+                        <button class="sort-btn">최신순</button>
+                    </div>
+
+                    <!-- 개별 리뷰 피드 -->
+                    <div class="review-list-wrapper">
+                        <div th:each="review : ${detail.reviewList}" class="review-item">
+                            <div class="review-user-row">
+                                <div class="user-profile-group">
+                                    <div class="user-avatar" th:text="${#strings.substring(review.writerName, 0, 1)}">김</div>
+                                    <span class="user-name" th:text="${review.writerName}">닉네임</span>
+                                </div>
+                                <span class="star-rating-emerald">★★★★★ <span th:text="${review.rating}">5.0</span></span>
+                            </div>
+                            <p class="review-content whitespace-pre-line" th:text="${review.content}">후기 상세 내용...</p>
+                            
+                            <!-- 튜터 피드백 (답글) -->
+                            <div th:if="${review.tutorReply != null}" class="tutor-reply-box">
+                                <div class="reply-header">
+                                    <span>💬 튜터 답글</span>
+                                    <span th:text="${detail.creator.creatorName}">아라쌤</span>
+                                </div>
+                                <p class="review-content" th:text="${review.tutorReply}">소중한 답변...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 튜터 소개 영역 -->
+                <article id="tutor" class="detail-section" th:if="${detail.creator != null}">
+                    <h3 class="section-title">튜터 소개</h3>
+                    <div class="tutor-card">
+                        <img th:src="${detail.creator.creatorImg}" class="tutor-img" alt="튜터 사진">
+                        <h4 class="tutor-name" th:text="${detail.creator.creatorName}">크리에이터명</h4>
+                        
+                        <div class="tutor-badges">
+                            <span th:each="cert : ${#strings.arraySplit(detail.creator.certificates, ',')}" 
+                                  class="badge-item" 
+                                  th:text="${cert}">자격증</span>
+                        </div>
+                        
+                        <p class="tutor-sub" th:text="${detail.creator.education}">경력 학력...</p>
+                        <p class="tutor-intro whitespace-pre-line" th:text="${detail.creator.creatorIntro}">소개글...</p>
+                    </div>
+                </article>
+
+                <!-- 비슷한 클래스 그리드 -->
+                <section class="detail-section">
+                    <h3 class="section-title">비슷한 클래스에요</h3>
+                    <div class="similar-grid">
+                        <div th:each="rec : ${detail.sameCategoryList}" class="similar-card">
+                            <div class="similar-img-wrapper">
+                                <img th:src="${rec.imageUrl}" class="similar-img" alt="추천 이미지">
+                                <button class="heart-btn" type="button">❤️</button>
+                            </div>
+                            <span class="similar-location" th:text="${rec.groupSize}">구/동 위치</span>
+                            <h4 class="similar-title" th:text="${rec.title}">추천 클래스 제목</h4>
+                            <span class="similar-price" th:text="${#numbers.formatInteger(rec.price, 3, 'COMMA') + '원'}">0원</span>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- [우측 영역] 플로팅 예약 카드 -->
+            <aside class="right-sidebar">
+                <div class="sticky-sidebar">
+                    <h2 class="sidebar-title" th:text="${detail.classDetail.title}">클래스 타이틀</h2>
+                    
+                    <div class="sidebar-reviews">
+                        <span class="star-highlight">★ <span th:text="${detail.reviewSummary != null ? detail.reviewSummary.averageRating : '5.0'}">5.0</span></span>
+                        <span class="divider-v">|</span>
+                        <span>리뷰 <span th:text="${detail.reviewSummary != null ? detail.reviewSummary.totalCount : 0}">0</span>건</span>
+                    </div>
+
+                    <div class="price-container">
+                        <p class="price-per-hour">
+                            <span th:text="${#numbers.formatInteger(detail.classDetail.pricePerHour, 3, 'COMMA')}">27,500</span>원/시간
+                        </p>
+                        <p class="price-total">
+                            <span th:text="${#numbers.formatInteger(detail.classDetail.price, 3, 'COMMA') + '원'}">55,000원</span>
+                        </p>
+                        
+                        <div class="class-meta-group">
+                            <div>👥 <span th:text="${detail.classDetail.groupSize}">그룹 클래스</span></div>
+                            <div>🕒 <span th:text="${detail.classDetail.duration}">소요 시간</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 수강 일정 선택 -->
+                    <div class="calendar-section">
+                        <label class="calendar-label">수강 일정 선택</label>
+                        <div class="date-slider" id="dateSlider">
+                            <button th:each="schedule, iter : ${detail.scheduleList}" type="button" 
+                                    class="date-btn"
+                                    th:data-date="${#temporals.format(schedule.classDate, 'yyyy-MM-dd')}"
+                                    th:classappend="${iter.index == 0} ? 'active' : ''">
+                                <span th:text="${#temporals.format(schedule.classDate, 'E')}">요일</span>
+                                <span class="date-num" th:text="${#temporals.format(schedule.classDate, 'd')}">일</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 시간 선택 -->
+                    <div class="time-section">
+                        <label class="time-label">시간 선택</label>
+                        <div class="time-slot-list" id="timeSlotContainer">
+                            <div th:each="schedule : ${detail.scheduleList}" class="time-slot" th:data-date="${#temporals.format(schedule.classDate, 'yyyy-MM-dd')}">
+                                <button type="button" class="time-slot-btn"
+                                        th:disabled="${schedule.currentReserved >= schedule.maxCapacity}">
+                                    <span th:text="${schedule.startTime + ' ~ ' + schedule.endTime}">시간대</span>
+                                    <span th:if="${schedule.currentReserved >= schedule.maxCapacity}" class="status-soldout">마감됨</span>
+                                    <span th:unless="${schedule.currentReserved >= schedule.maxCapacity}" class="status-available">예약 가능</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 하단 액션 버튼 -->
+                    <div class="btn-group">
+                        <button type="button" class="btn-outline">💬 1:1 문의</button>
+                        <button type="button" class="btn-primary">클래스 결제하기</button>
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+    </main>
+
+    <!-- 푸터 회사 정보 -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <p class="company-name">원데이클래스 주식회사</p>
+                <p>주소: 서울특별시 강남구 테헤란로 | 대표이사: 홍길동 | 사업자등록번호: 000-00-00000</p>
+                <p style="margin-top: 4px;">고객센터: 1588-0000 | 이메일: info@oneday.co.kr</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">이용약관</a>
+                <a href="#" class="bold">개인정보처리방침</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 연계 로직 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dateButtons = document.querySelectorAll(".date-btn");
+            const timeSlots = document.querySelectorAll(".time-slot");
+
+            function filterTimeSlots(selectedDate) {
+                timeSlots.forEach(slot => {
+                    if (slot.getAttribute("data-date") === selectedDate) {
+                        slot.style.display = "block";
+                    } else {
+                        slot.style.display = "none";
+                    }
+                });
+            }
+
+            // 초기 로딩 시 첫 번째 선택되어 있는 날짜 기준 시간 표시
+            const defaultActiveBtn = document.querySelector(".date-btn.active");
+            if (defaultActiveBtn) {
+                filterTimeSlots(defaultActiveBtn.getAttribute("data-date"));
+            }
+
+            // 날짜 전환 시 활성화 스타일 변경 및 시간대 필터링
+            dateButtons.forEach(btn => {
+                btn.addEventListener("click", function() {
+                    dateButtons.forEach(b => b.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const selectedDate = this.getAttribute("data-date");
+                    filterTimeSlots(selectedDate);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
