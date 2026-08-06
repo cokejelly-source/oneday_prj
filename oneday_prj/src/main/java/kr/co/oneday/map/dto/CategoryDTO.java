@@ -1,4 +1,4 @@
-package kr.co.oneday.dto;
+package kr.co.oneday.map.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.oneday.dao.PaymentDAO">
+<select id="selectReservationInfo" parameterType="int" resultType="kr.co.oneday.dto.ReservationDTO">
+
+</select>
+<insert id="insertPayment" parameterType="kr.co.oneday.dto.PaymentDTO">
+insert into payment(PAYMENT_CODE,	RESERVATION_CODE,	AMOUNT,	MEANS,	
+					PAYMENT_DATE,	STATUS,	PG_CODE,	REFUND)
+values(seq_payment_code.nextval(), #{reservationCode}, #{amount}, #{means}, sysdate, '결제완료', #{pgCode},0)
+</insert>
+<update id=""></update>
+</mapper>

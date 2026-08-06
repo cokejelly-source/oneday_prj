@@ -1,4 +1,4 @@
-package kr.co.oneday.dao;
+package kr.co.oneday.payment.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

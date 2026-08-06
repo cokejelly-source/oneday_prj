@@ -1,4 +1,4 @@
-package kr.co.oneday.dao;
+package kr.co.oneday.map.dao;
 
 import java.util.List;
 

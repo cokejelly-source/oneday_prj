@@ -2,12 +2,12 @@ package kr.co.oneday.service;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.oneday.dao.PaymentDAO;
-import kr.co.oneday.dao.ReservationDAO;
 import kr.co.oneday.dto.PaymentDTO;
 import kr.co.oneday.dto.ReservationDTO;
+import kr.co.oneday.payment.dao.PaymentDAO;
+import kr.co.oneday.payment.dao.ReservationDAO;
 @Service
-public class ReservationService {
+public class PaymentService {
 	private ReservationDAO rDAO;
 	private PaymentDAO pDAO;
 	

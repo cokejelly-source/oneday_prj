@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CreatorDTO {
+public class OperatorDTO {
 	private int operatorCode;
 	private int memberCode;
 	private String approvalStatus;
