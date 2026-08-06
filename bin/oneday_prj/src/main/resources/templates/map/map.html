@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>클래스 지도</title>
+    <!-- 외부 스타일시트 연결 -->
+    <link rel="stylesheet" th:href="@{/css/map.css}">
+</head>
+<body class="map-page-body">
+
+    <!-- 1. 헤더 영역 -->
+    <header class="header">
+        <h1 class="header-title">클래스 지도</h1>
+    </header>
+
+    <!-- 2. 메인 컨텐츠 영역 -->
+    <div class="main-container">
+        
+        <!-- 좌측 사이드바: 클래스 목록 -->
+        <div class="sidebar">
+            <div class="class-count">
+                총 <span th:text="${classList.size()}">0</span>개의 클래스
+            </div>
+            
+            <!-- 클래스 카드 리스트 반복문 -->
+            <div th:each="item : ${classList}" 
+                 class="class-card"
+                 th:data-lat="${item.latitude}"
+                 th:data-lng="${item.longitude}"
+                 th:data-title="${item.title}">
+                
+                <img th:src="${item.imageUrl}" class="class-img" alt="클래스 이미지">
+                
+                <div class="card-info">
+                    <div>
+                        <span class="category-badge" th:text="${item.category}">카테고리</span>
+                        <h3 class="class-title" th:text="${item.title}">클래스 제목</h3>
+                        <p class="class-address" th:text="${item.address}">주소</p>
+                        <p class="class-date" th:text="${#temporals.format(item.classDate, 'yyyy.MM.dd (E) HH:mm')}">일정</p>
+                    </div>
+                    <div class="price-container">
+                        <span class="class-price" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}">0원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 우측 영역: 지도 -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- 카카오 지도 API 로드 (자신의 APP KEY를 입력하세요) -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_MAP_APP_KEY&libraries=services"></script>
+    
+    <!-- 타임리프 데이터를 자바스크립트 전역 변수로 전달 -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const classListData = /*[[${classList}]]*/ [];
+        /*]]>*/
+    </script>
+    
+    <!-- 외부 자바스크립트 연결 -->
+    <script th:src="@{/js/map-class.js}" defer></script>
+</body>
+</html>

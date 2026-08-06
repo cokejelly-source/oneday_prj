@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.oneday.dao.MapDAO">
+<!--카테고리를 가져옴-->
+<select id="selectCategoryList" resultType="kr.co.oneday.dto.CategoryDTO">
+    SELECT *
+    FROM CATEGORY
+</select>
+<!--북마크 추가-->
+<insert id="insertBookmark">
+</insert>
+<!--북마크 제거-->
+<delete id="deleteBookmark">
+delete from bookmark
+where member_code = #{memberCode} 
+and class_code = #{classCode}
+</delete>
+<select id="selectClass" parameterType="kr.co.oneday.dto.MapSearchDTO" resultType="kr.co.oneday.dto.ClassDTO">
+
+</select>
+</mapper>
