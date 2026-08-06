@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.oneday.dto.ClassDTO;
 import kr.co.oneday.service.MapService;
 import lombok.RequiredArgsConstructor;
 

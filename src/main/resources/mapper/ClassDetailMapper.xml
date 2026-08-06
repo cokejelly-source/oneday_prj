@@ -2,8 +2,85 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.oneday.mapper.ClassDetailMapper">
+<mapper namespace="kr.co.oneday.dao.ClassDetailDAO">
 <select id="selectClass" parameterType="int" resultType="kr.co.oneday.dto.ClassDTO">
-select 
+  	 SELECT *
+    FROM class
+    WHERE class_code = #{classCode}
+</select>
+<!--비슷한 클래스 리스트 조회-->
+<select id="selectSameCategoryList" resultType="kr.co.oneday.dto.ClassDTO">
+	SELECT *
+    FROM class
+    WHERE category_code = #{categoryCode}
+      AND class_code != #{classCode}
+</select>
+<!--작가 조회-->
+<select id="selectCreator" parameterType="int" resultType="kr.co.oneday.dto.CreatorDTO">
+select *
+from creator
+where operator_code = #{creatorCode}
+</select>
+<!--스케쥴조회-->
+<select id="selectSchedule" parameterType="int" resultType="kr.co.oneday.dto.ScheduleDTO">
+select *
+from schedule s
+join class_repeat_rule crr
+on s.repeat_rule_code = crr.repeat_rule_code
+WHERE s.class_code = #{classCode}
+</select>
+<!--스케쥴리스트조회-->
+<select id="selectScheduleList" parameterType="int" resultType="kr.co.oneday.dto.ScheduleDTO">
+select *
+from schedule s
+join class_repeat_rule crr
+on s.repeat_rule_code = crr.repeat_rule_code
+WHERE s.class_code = #{classCode}
+</select>
+<!--커리큘럼조회-->
+<select id="selectCurriculum" parameterType="int" resultType="kr.co.oneday.dto.CurriculumDTO">
+select *
+from class_curriculum
+where class_code = #{classCode}
+</select>
+<!--리뷰리스트 조회-->
+<select id="selectReviewList" parameterType="int" resultType="kr.co.oneday.dto.ReviewDTO">
+select *
+from review
+where class_code=#{classCode}
+</select>
+<!--북마크 추가-->
+<insert id="insertBookmark">
+INSERT INTO bookmark(
+    bookmark_code,
+    member_code,
+    class_code,
+    input_date
+)
+VALUES(
+    seq_bookmark_code.NEXTVAL,
+    #{memberCode},
+    #{classCode},
+    SYSDATE
+)
+</insert>
+<!--북마크 제거-->
+<delete id="deleteBookmark">
+delete from bookmark
+where member_code = #{memberCode} 
+and class_code = #{classCode}
+</delete>
+<!--리뷰 별점개수와 별점 평균-->
+<select id="selectReviewSummary" parameterType="int" resultType="kr.co.oneday.dto.ReviewSummaryDTO">
+SELECT
+    COUNT(CASE WHEN STAR_RATING = 5 THEN 1 END) AS FIVE_STAR,
+    COUNT(CASE WHEN STAR_RATING = 4 THEN 1 END) AS FOUR_STAR,
+    COUNT(CASE WHEN STAR_RATING = 3 THEN 1 END) AS THREE_STAR,
+    COUNT(CASE WHEN STAR_RATING = 2 THEN 1 END) AS TWO_STAR,
+    COUNT(CASE WHEN STAR_RATING = 1 THEN 1 END) AS ONE_STAR,
+    COUNT(*) AS REVIEW_COUNT,
+    AVG(STAR_RATING) AS AVG_RATING
+FROM REVIEW
+WHERE CLASS_CODE = #{classCode}
 </select>
 </mapper>
