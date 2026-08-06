@@ -19,7 +19,11 @@ delete from bookmark
 where member_code = #{memberCode} 
 and class_code = #{classCode}
 </delete>
-<select id="selectClass" parameterType="kr.co.oneday.dto.MapSearchDTO" resultType="kr.co.oneday.dto.ClassDTO">
-
+<!--위치에서 가져올 클래스 리스트-->
+<select id="selectClass" parameterType="kr.co.oneday.map.dto.MapSearchDTO" resultType="kr.co.oneday.map.dto.ClassDTO">
+SELECT *
+FROM class
+WHERE latitude BETWEEN #{minLat} AND #{maxLat}
+  AND longitude BETWEEN #{minLng} AND #{maxLng}
 </select>
 </mapper>

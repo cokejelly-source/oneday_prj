@@ -10,8 +10,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MapSearchDTO {
-	private String dong;
 	private int categoryId;
 	private Date classDate;
 	private String startTime;
+	private double minLat;
+	private double maxLat;
+	private double minLng;
+	private double maxLng;
+	private double myLat;
+	private double myLng;
 }

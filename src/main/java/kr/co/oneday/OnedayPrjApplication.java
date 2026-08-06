@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 @MapperScan({
     "kr.co.oneday.classDetail.dao",
-    "kr.co.oneday.member.dao",
+    "kr.co.oneday.map.dao",
     "kr.co.oneday.payment.dao"
 })
 public class OnedayPrjApplication extends SpringBootServletInitializer {
