@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.7</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.3.2</version>
+		<relativePath/>
 	</parent>
 	<groupId>kr.co.oneday</groupId>
 	<artifactId>spring_thymeleaf</artifactId>
@@ -30,11 +30,38 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!-- Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- Thymeleaf -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- JDBC (DataSource 자동 설정을 위해 필수) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<!-- MyBatis -->
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>3.0.3</version>
+		</dependency>
+
+		<!-- Oracle JDBC -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc11</artifactId>
+		</dependency>
+
+		<!-- DevTools & Lombok -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -46,33 +73,19 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- XML Parsing (jdom2) -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
-		   <!-- <version>4.0.6</version>
-		    <scope>compile</scope>-->
-		</dependency>
-		<dependency>
-    <groupId>org.mybatis.spring.boot</groupId>
-    <artifactId>mybatis-spring-boot-starter</artifactId>
-    <version>3.0.4</version>
-</dependency>
-<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom2</artifactId>
 			<version>2.0.6.1</version>
-			<scope>compile</scope>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -89,42 +102,6 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
-					<execution>
-						<id>default-testCompile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
