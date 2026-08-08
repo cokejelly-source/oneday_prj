@@ -30,7 +30,7 @@
             <!-- 클래스 이미지 슬라이더 영역 -->
             <div class="image-slider-wrapper">
                 <!-- 첫 번째 이미지를 대표로 노출 -->
-                <img th:src="${classDetail.imageUrls[0]}" class="slider-img" alt="클래스 대표 이미지">
+                <!-- <img th:src="${classDetail.imageUrls[0]}" class="slider-img" alt="클래스 대표 이미지"> -->
                 <div class="image-badge">
                     원데이로 만나는 고퀄리티 작품 1점 완성
                 </div>
@@ -40,7 +40,7 @@
             <div class="tab-nav">
                 <a href="#intro" class="tab-item active">클래스 소개</a>
                 <a href="#curriculum" class="tab-item">커리큘럼</a>
-                <a href="#reviews" class="tab-item" th:text="|리뷰 ${classDetail.reviewCount}|">리뷰 0</a>
+                <a href="#reviews" class="tab-item" th:text="|리뷰 ${Detail.reviewCount}|">리뷰 0</a>
                 <a href="#tutor" class="tab-item">튜터 소개</a>
             </div>
 
@@ -52,23 +52,23 @@
                         <span>⚠️</span> 클래스 결제 전, 확인해주세요!
                     </h4>
                     <ul class="notice-list">
-                        <li th:each="notice : ${classDetail.notices}" th:text="${notice}">공지 정보</li>
+                        <li th:each="notice : ${detail.notices}" th:text="${notice}">공지 정보</li>
                     </ul>
                 </div>
 
                 <!-- 클래스 소개 본문 -->
                 <div>
                     <h3 class="section-title">클래스 소개</h3>
-                    <p class="section-desc" th:text="${classDetail.classIntro}">
+                    <p class="section-desc" th:text="${detail.classIntro}">
                         여기에 클래스에 대한 상세하고 친절한 설명글이 출력됩니다.
                     </p>
                 </div>
             </div>
 
             <!-- 튜터 소개 영역 -->
-            <div id="tutor" class="tutor-card" th:if="${classDetail.tutor != null}">
+            <div id="tutor" class="tutor-card" th:if="${detail.tutor != null}">
                 <h3 class="tutor-header">튜터 소개</h3>
-                <img th:src="${classDetail.tutor.profileImgUrl != null ? classDetail.tutor.profileImgUrl : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb'}" 
+                <img th:src="${detail.tutor.profileImgUrl != null ? detail.tutor.profileImgUrl : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb'}" 
                      class="tutor-img" alt="튜터 사진">
                 <h4 class="tutor-name" th:text="${classDetail.tutor.name}">튜터 이름</h4>
                 <p class="tutor-badge" th:text="${classDetail.tutor.badge}">자격증</p>
@@ -78,19 +78,19 @@
 
             <!-- 리뷰 영역 -->
             <div id="reviews" class="reviews-container">
-                <h3 class="section-title" th:text="|리뷰 ${classDetail.reviewCount}개|">리뷰 0개</h3>
+                <h3 class="section-title" th:text="|리뷰 ${detail.reviewCount}개|">리뷰 0개</h3>
                 
                 <!-- 평점 요약 바 -->
                 <div class="review-summary-card">
                     <div class="summary-score-box">
-                        <div class="summary-score" th:text="${classDetail.rating}">5.0</div>
+                        <div class="summary-score" th:text="${detail.rating}">5.0</div>
                         <div class="stars-yellow">★★★★★</div>
                     </div>
                 </div>
 
                 <!-- 실제 리뷰 개별 리스트 -->
                 <div class="review-list">
-                    <div th:each="review : ${classDetail.reviews}" class="review-item">
+                    <div th:each="review : ${detail.reviews}" class="review-item">
                         <div class="review-header">
                             <span class="review-author" th:text="${review.authorName}">사용자명</span>
                             <span class="review-date" th:text="${review.createdDate}">작성일</span>

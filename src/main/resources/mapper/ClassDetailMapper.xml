@@ -2,27 +2,27 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.oneday.dao.ClassDetailDAO">
-<select id="selectClass" parameterType="int" resultType="kr.co.oneday.dto.ClassDTO">
+<mapper namespace="kr.co.oneday.classDetail.ClassDetailDAO">
+<select id="selectClass" parameterType="int" resultType="kr.co.oneday.classDetail.ClassDTO">
   	 SELECT *
     FROM class
     WHERE class_code = #{classCode}
 </select>
 <!--비슷한 클래스 리스트 조회-->
-<select id="selectSameCategoryList" resultType="kr.co.oneday.dto.ClassDTO">
+<select id="selectSameCategoryList" resultType="kr.co.oneday.classDetail.ClassDTO">
 	SELECT *
     FROM class
     WHERE category_code = #{categoryCode}
       AND class_code != #{classCode}
 </select>
 <!--작가 조회-->
-<select id="selectCreator" parameterType="int" resultType="kr.co.oneday.dto.CreatorDTO">
+<select id="selectCreator" parameterType="int" resultType="kr.co.oneday.classDetail.CreatorDTO">
 select *
 from creator
 where operator_code = #{creatorCode}
 </select>
 <!--스케쥴조회-->
-<select id="selectSchedule" parameterType="int" resultType="kr.co.oneday.dto.ScheduleDTO">
+<select id="selectSchedule" parameterType="int" resultType="kr.co.oneday.classDetail.ScheduleDTO">
 select *
 from schedule s
 join class_repeat_rule crr
@@ -30,7 +30,7 @@ on s.repeat_rule_code = crr.repeat_rule_code
 WHERE s.class_code = #{classCode}
 </select>
 <!--스케쥴리스트조회-->
-<select id="selectScheduleList" parameterType="int" resultType="kr.co.oneday.dto.ScheduleDTO">
+<select id="selectScheduleList" parameterType="int" resultType="kr.co.oneday.classDetail.ScheduleDTO">
 select *
 from schedule s
 join class_repeat_rule crr
@@ -38,13 +38,13 @@ on s.repeat_rule_code = crr.repeat_rule_code
 WHERE s.class_code = #{classCode}
 </select>
 <!--커리큘럼조회-->
-<select id="selectCurriculum" parameterType="int" resultType="kr.co.oneday.dto.CurriculumDTO">
+<select id="selectCurriculum" parameterType="int" resultType="kr.co.oneday.classDetail.CurriculumDTO">
 select *
 from class_curriculum
 where class_code = #{classCode}
 </select>
 <!--리뷰리스트 조회-->
-<select id="selectReviewList" parameterType="int" resultType="kr.co.oneday.dto.ReviewDTO">
+<select id="selectReviewList" parameterType="int" resultType="kr.co.oneday.classDetail.ReviewDTO">
 select *
 from review
 where class_code=#{classCode}
@@ -71,7 +71,7 @@ where member_code = #{memberCode}
 and class_code = #{classCode}
 </delete>
 <!--리뷰 별점개수와 별점 평균-->
-<select id="selectReviewSummary" parameterType="int" resultType="kr.co.oneday.dto.ReviewSummaryDTO">
+<select id="selectReviewSummary" parameterType="int" resultType="kr.co.oneday.classDetail.ReviewSummaryDTO">
 SELECT
     COUNT(CASE WHEN STAR_RATING = 5 THEN 1 END) AS FIVE_STAR,
     COUNT(CASE WHEN STAR_RATING = 4 THEN 1 END) AS FOUR_STAR,
